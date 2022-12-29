@@ -24,20 +24,20 @@ const port = 3000;
 //Middleware necesario para poder obtener la data que viaja a nuestro servicio en formato json, se debe implementar un middleware de express "express.json()"
 app.use(express.json());
 //Hacemos uso de cors para habilitar el acceso desde cualquier origen
-//app.use(cors());
+app.use(cors());
 //Hacemos uso de cors para habilitar el acceso desde origenes especificos, creando una lista blanco
-const whiteList = ['http://localhost:3000'];
-const options = {
-  origin: (origin, callback) => {
-    if (whiteList.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Access to restricted APIs'));
-    }
-  }
-};
+// const whiteList = ['http://localhost:3000'];
+// const options = {
+//   origin: (origin, callback) => {
+//     if (whiteList.includes(origin) || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Access to restricted APIs'));
+//     }
+//   }
+// };
+// app.use(cors(options));
 
-app.use(cors(options));
 //Hacemos uso de helmet
 //Deshabilitamos la cabecera de express x-powered-by
 // app.disable('x-powered-by');
