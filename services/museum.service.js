@@ -7,9 +7,12 @@ class MuseumServices {
     this.museums = [];
   }
 
-  async find() {
+  async find(limit) {
     if (this.museums.length == 0) {
       throw boom.notFound('Museums not found');
+    }
+    if (limit) {
+      return this.museums.slice(0, limit);
     }
     return this.museums;
   }
@@ -53,7 +56,7 @@ class MuseumServices {
         description: faker.lorem.paragraph(),
         address: faker.address.streetAddress(),
         city: faker.address.cityName(),
-        image: faker.image.imageUrl(),
+        image: 'https://www.unesco.org/sites/default/files/2021-09/museums.jpg',
         isBlock: faker.datatype.boolean(),
         id: index
       });

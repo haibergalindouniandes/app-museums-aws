@@ -14,9 +14,9 @@ router.get('/',
     // Forma convencional para obtener el path param a buscar
     // const size = req.query.size;
     // Destructiracion de objetos ecmascript para obtener solo los elementos que necesito
-    // const { size } = req.query;
+    const { limit } = req.query;
     try {
-      let museums = await service.find();
+      let museums = await service.find(limit);
       res.status(200).json({
         statusCode: 200,
         message: 'Success transaction',
