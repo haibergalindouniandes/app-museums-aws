@@ -7,7 +7,7 @@ const description = Joi.string().min(5).max(500);
 const address = Joi.string().min(5).max(500);
 const city = Joi.string().min(5).max(100);
 const image = Joi.string().uri();
-const isBlock = Joi.boolean();
+const isBlocked = Joi.boolean();
 const noMuseums = Joi.number().min(1).max(1000);
 
 const getMuseumSchema = Joi.object({
@@ -28,7 +28,7 @@ const updateMuseumSchema = Joi.object({
   address: address.required(),
   city: city.required(),
   image: image.required(),
-  isBlock: isBlock.required(),
+  isBlocked: isBlocked.required(),
 });
 
 const updateParcialMuseumSchema = Joi.object({
@@ -37,7 +37,7 @@ const updateParcialMuseumSchema = Joi.object({
   address: address,
   city: city,
   image: image,
-  isBlock: isBlock,
+  isBlocked: isBlocked,
 });
 
 const generateMuseumsSchema = Joi.object({

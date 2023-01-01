@@ -37,7 +37,8 @@ router.get('/:id',
     // Destructiracion de objetos ecmascript para obtener solo los elementos que necesito
     try {
       const { id } = req.params;
-      let museum = await service.findOne(id);
+      const { forceQuery } = req.query;
+      let museum = await service.findOne(id, forceQuery);
       res.status(200).json({
         statusCode: 200,
         message: 'Success transaction',

@@ -17,7 +17,7 @@ class MuseumServices {
     return this.museums;
   }
 
-  async findOne(id) {
+  async findOne(id, forceQuery) {
     //Inyectamos un error para ver si funciona el Middleware de error
     //const error = this.museums.error();
     //Primera forma de retornar un objeto especifico usando filter
@@ -29,9 +29,12 @@ class MuseumServices {
     if (!museum) {
       throw boom.notFound(`The museum with the id [${id}] not found`);
     }
-    if (museum.isBlock) {
-      throw boom.conflict(`The museum with the id [${id}] is locked`);
+    if (!forceQuery || forceQuery == 'false') {
+      if (museum.isBlocked) {
+        throw boom.conflict(`The museum [${museum.name}] is blocked`);
+      }
     }
+
     return museum;
   }
 
@@ -41,8 +44,8 @@ class MuseumServices {
     if (existMuseumName) {
       throw boom.conflict(`The museum with the name [${museum.name}] already exists`);
     }
-    if (!museum.isBlock) {
-      museum.isBlock = false;
+    if (!museum.isBlocked) {
+      museum.isBlocked = false;
     }
     museum.id = consecutive;
     this.museums.push(museum);
@@ -50,6 +53,7 @@ class MuseumServices {
   }
 
   async generate(limit) {
+    this.museums = [];
     for (let index = 1; index <= limit; index++) {
       this.museums.push({
         name: `Museo ${faker.address.country()}`,
@@ -57,7 +61,7 @@ class MuseumServices {
         address: faker.address.streetAddress(),
         city: faker.address.cityName(),
         image: 'https://www.unesco.org/sites/default/files/2021-09/museums.jpg',
-        isBlock: faker.datatype.boolean(),
+        isBlocked: faker.datatype.boolean(),
         id: index
       });
     }
@@ -101,8 +105,8 @@ class MuseumServices {
     if (data.image) {
       filteredMuseum.image = data.image
     }
-    if (data.isBlock) {
-      filteredMuseum.isBlock = data.isBlock
+    if (data.isBlocked) {
+      filteredMuseum.isBlocked = data.isBlocked
     }
     this.museums[indexMuseum] = filteredMuseum;
     return filteredMuseum;
