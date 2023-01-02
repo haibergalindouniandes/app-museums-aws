@@ -23,6 +23,7 @@ const createMuseumSchema = Joi.object({
 });
 
 const updateMuseumSchema = Joi.object({
+  id: id,
   name: name.required(),
   description: description.required(),
   address: address.required(),
@@ -32,6 +33,7 @@ const updateMuseumSchema = Joi.object({
 });
 
 const updateParcialMuseumSchema = Joi.object({
+  id: id,
   name: name,
   description: description,
   address: address,

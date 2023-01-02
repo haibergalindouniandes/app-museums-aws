@@ -15,8 +15,9 @@ router.get('/',
     // const size = req.query.size;
     // Destructiracion de objetos ecmascript para obtener solo los elementos que necesito
     const { limit } = req.query;
+    const { queryType } = req.query;
     try {
-      let museums = await service.find(limit);
+      let museums = await service.find(limit, queryType);
       res.status(200).json({
         statusCode: 200,
         message: 'Success transaction',
