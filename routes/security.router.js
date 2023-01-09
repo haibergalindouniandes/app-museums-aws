@@ -3,7 +3,7 @@ const SecurityServices = require("../services/security.service");
 const router = express.Router();
 const service = new SecurityServices();
 const validatorHandler = require('../middlewares/validator.handler');
-const validatorJWTHandler = require('../middlewares/validator.jwt.handler');
+// const validatorJWTHandler = require('../middlewares/validator.jwt.handler');
 const { postJWTGenerateSchema } = require("../schemas/security.schema");
 
 // Recurso post para generar JWT

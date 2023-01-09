@@ -1,5 +1,4 @@
 const express = require('express');
-const { async } = require('rxjs');
 const MuseumServices = require('../services/museum.service');
 const router = express.Router();
 const service = new MuseumServices();
@@ -159,7 +158,5 @@ router.delete('/:id',
     }
 
   });
-
-
 
 module.exports = router;
